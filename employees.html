@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employees – Asset Tracker</title>
+
+<style>
+  :root {
+    --primary: #006066;
+    --dark: #0A3F41;
+    --bg: #ffffff;
+    --text: #333;
+    --radius: 10px;
+  }
+
+ html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+body {
+  background-color: #0D6569;
+  background-image: url("BC.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow-y: auto;
+  color: white;
+  font-family: 'Tajawal', sans-serif;
+}
+
+  header {
+    background: var(--primary);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  #title {
+    font-size: 1.6rem;
+    color: white;
+    font-weight: bold;
+  }
+
+  .search-container {
+    width: 70%;
+    margin: 20px auto;
+    display: flex;
+    gap: 10px;
+  }
+
+  input {
+    flex: 1;
+    padding: 12px;
+    border-radius: var(--radius);
+    border: 1px solid #ccc;
+    outline: none;
+  }
+
+  button {
+    background: var(--primary);
+    border: none;
+    color: white;
+    padding: 12px 18px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  button:hover { opacity: .85; }
+
+  table {
+    width: 90%;
+    margin: auto;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  th {
+    background: var(--primary);
+    color: white;
+    padding: 12px;
+    text-align: left;
+  }
+
+  td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+  }
+
+  tr:hover {
+    background: #f2f7f7;
+  }
+
+  footer {
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 30px;
+    background: var(--primary);
+    color: white;
+  }
+
+</style>
+</head>
+<body>
+
+<header>
+  <span id="title">Employees</span>
+</header>
+
+<div class="search-container">
+  <input type="text" id="searchInput" placeholder="Search by name or job title..." onkeyup="filterEmployees()">
+  <button onclick="loadEmployees()">Show All</button>
+</div>
+
+<table id="employeesTable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Job Title</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<footer>
+  Riyadh Schools • IT Department
+</footer>
+
+<script>
+// Load CSV file and display data
+async function loadEmployees() {
+  const response = await fetch('employees.csv');
+  const data = await response.text();
+  const rows = data.trim().split('\n').slice(1); // Remove header row
+
+  const tableBody = document.querySelector('#employeesTable tbody');
+  tableBody.innerHTML = ''; // Reset table
+
+  rows.forEach(row => {
+    const [id, name, job] = row.split(',');
+    let tr = document.createElement('tr');
+    tr.innerHTML = `<td>${name}</td><td>${job}</td>`;
+    
+    tr.onclick = () => {
+      location.href = `profile.html?name=${encodeURIComponent(name)}`;
+    };
+    
+    tableBody.appendChild(tr);
+  });
+}
+
+function filterEmployees() {
+  let filter = document.getElementById("searchInput").value.toUpperCase();
+  let rows = document.querySelectorAll("#employeesTable tbody tr");
+
+  rows.forEach(row => {
+    let name = row.cells[0].innerText.toUpperCase();
+    let job = row.cells[1].innerText.toUpperCase();
+    row.style.display = (name.includes(filter) || job.includes(filter)) ? "" : "none";
+  });
+}
+
+// Load on first open
+loadEmployees();
+</script>
+
+</body>
+</html>
+

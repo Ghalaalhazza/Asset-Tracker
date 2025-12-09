@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Asset Tracking System</title>
+<style>
+  :root {
+    --primary: #006066;
+    --dark: #0A3F41;
+    --bg: #f4f7f7;
+    --text-dark: #1a1a1a;
+    --radius: 14px;
+  }
+  html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+body {
+  background-color: #0D6569;
+  background-image: url("BC.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow-y: auto;
+  color: white;
+  font-family: 'Tajawal', sans-serif;
+}
+
+  /* Navbar */
+  header {
+    background: var(--dark);
+    padding: 14px 20px;
+    position: sticky;
+    top: 0;
+  }
+  nav a {
+    margin: 0 14px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.05rem;
+  }
+  nav a:hover { opacity: 0.8; }
+
+  /* Dashboard Grid */
+  h2 {
+    text-align: center;
+    margin: 30px 0 10px;
+    font-size: 2rem;
+    color: var(--primary);
+  }
+  .grid {
+    width: 90%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+  }
+  .card {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 28px 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(0,0,0,.08);
+    transition: 0.3s ease;
+  }
+  .card:hover {
+    background: var(--primary);
+    color: #fff;
+    transform: translateY(-6px);
+    box-shadow: 0 10px 22px rgba(0,0,0,.15);
+  }
+
+  footer {
+    margin-top: auto;
+    padding: 12px;
+    background: var(--dark);
+    text-align: center;
+    color: #fff;
+    font-size: 0.9rem;
+  }
+
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="employees.html">Employees</a>
+    <a href="custodies.html">Custodies</a>
+    <a href="stock.html">Stock</a>
+    <a href="resigned.html">Resigned</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
+
+<h2>Dashboard</h2>
+
+<div class="grid">
+  <div class="card" onclick="location.href='employees.html'">Employees</div>
+  <div class="card" onclick="location.href='custodies.html'">Custodies</div>
+  <div class="card" onclick="location.href='stock.html'">Stock</div>
+  <div class="card" onclick="location.href='resigned.html'">Resigned</div>
+</div>
+
+<footer>
+  Ryiadh Schools Misk City — IT Department
+</footer>
+
+</body>
+</html>
